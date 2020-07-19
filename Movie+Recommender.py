@@ -53,12 +53,13 @@ def initModel(nfeatures, train):
     return Theta, X, rated
 
 def cost(Theta, X, train, rated, lam):
-    #This is our cost function with regularization
+    #This is the cost function with regularization
     
     regCost = (np.sum(np.square(Theta)) + np.sum(np.square(X))) * lam/2.0
     return np.sum(np.square(np.multiply(np.matmul(X, Theta) - train, rated))) + regCost
 
 def grad(Theta, X, train, lam):
+    #Finds the gradients and returns Theta and X after subtracting the gradients weighted by the learning rate.
     
     nmovies, nusers = train.shape
     Thetagrad = np.zeros(Theta.shape)
@@ -98,7 +99,7 @@ def fit(epochs,Theta, X, train, rated, lam, alpha, log = False):
     return X, Theta, costLog
 
 def tuneParams(ntrials, train, test):
-    #Here I use random search to tune the hyperparameter
+    #Here I use random search to tune the hyperparameters
     
     minError = float("inf")
     params = None
